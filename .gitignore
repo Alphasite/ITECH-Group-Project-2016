@@ -110,3 +110,5 @@ crashlytics.properties
 crashlytics-build.properties
 
 db.sqlite3
+
+venv/
