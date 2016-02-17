@@ -1,6 +1,13 @@
 from django.shortcuts import render
 
-# Create your views here.
 
-def home(request):
-    return render(request, 'intro.html')
+def index(request):
+    return render(request, 'index/body.html')
+
+
+def register(request):
+    return ""
+
+
+def logout(request):
+    return ""
