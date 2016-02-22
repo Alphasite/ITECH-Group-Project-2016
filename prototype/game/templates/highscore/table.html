@@ -2,4 +2,29 @@
 
 {% block content %}
 
+    <!-- this obviously isn't finished, but without all sorts of databasey
+    goodness it isn't going to do anything. -->
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-12">
+
+
+
+                <h2>Overview</h2>
+
+                <h2>High Score Table</h2>
+                <div>
+                    <!--% for gamemode in  gamemodes %-->
+                    <h3> {{ game.title }}</h3>
+                    <!--% for game in games -->
+                       <h4 class="list-group-item-heading">{{ game.title }}</h4>
+                       <p class="list-group-item-text">{{ game.score }}</p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 {% endblock %}
