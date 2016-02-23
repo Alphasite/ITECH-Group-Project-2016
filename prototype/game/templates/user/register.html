@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Register</title>
-</head>
-<body>
+{% extends 'common/base.html' %}
+
+{% block title %} Register {% endblock %}
+
+{% block content %}
     <form id="user_register" action="{% url 'register' %}" method="post" class="form-login-register">
             {% csrf_token %}
             {{ form }}
@@ -15,5 +13,4 @@
                         type="button">Cancel</button>
             </div>
     </form>
-</body>
-</html>
+{% endblock %}

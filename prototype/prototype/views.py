@@ -9,7 +9,7 @@ import game.utility as user_util
 
 class Main(View):
     def get(self, request):
-        return render(request, 'common/main.html', {})
+        return render(request, 'main.html', {})
 
 
 # Create your views here.
@@ -17,7 +17,7 @@ class Register(View):
     # If it is a get, display the form for people to enter detail
     def get(self, request):
         form = forms.RegisterForm()
-        return render(request, 'common/register.html', {'form': form})
+        return render(request, 'user/register.html', {'form': form})
 
     # Login otherwise
     def post(self, request):
@@ -43,7 +43,7 @@ class Login(View):
     # If it is a get, display the form for people to enter detail
     def get(self, request):
         form = forms.LoginForm()
-        return render(request, 'common/login.html', {'form': form})
+        return render(request, 'user/login.html', {'form': form})
 
     # Login otherwise
     def post(self, request):

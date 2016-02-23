@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
+{% extends 'common/base.html' %}
+{% load staticfiles %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/register-login.css' %}">
     <form id="user_register" action="{% url 'login' %}" method="post" class="form-login-register">
             {% csrf_token %}
             {{ form }}
@@ -15,5 +15,4 @@
                         type="button">Cancel</button>
             </div>
     </form>
-</body>
-</html>
+{% endblock %}
