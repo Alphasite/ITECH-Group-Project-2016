@@ -53,7 +53,6 @@ MIDDLEWARE_CLASSES = [
 ROOT_URLCONF = 'prototype.urls'
 
 
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
