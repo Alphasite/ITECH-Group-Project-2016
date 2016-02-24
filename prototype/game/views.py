@@ -7,26 +7,30 @@ class Index(View):
         return render(request, 'index/body.html')
 
 
-def register(request):
-    pass
-    # registered = False
-    # if request.method == 'POST':
-    #
-    #     user_form = forms.UserForm(data=request.POST)
-    #     if user_form.is_valid():
-    #         user = user_form.save()
-    #         user.set_password(user.password)
-    #         user.save()
-    #         registered = True
-    #
-    #     else:
-    #         print(user_form.errors)
-    #
-    # else:
-    #     user_form = forms.UserForm()
-    #
-    # return render(request, 'common/base.html', {'user_form': user_form, 'registered': registered})
+class NewGame(View):
+    def get(self, request):
+        return render(request, 'game/game.html')
 
 
-def create_game(request):
-    pass
+class HighScoreTable(View):
+    def get(self, request):
+        users_score_zombuy = [
+            {'username': 'nishad', 'score': 66666},
+            {'username': 'gerry', 'score': 28374},
+            {'username': 'euan', 'score': 100},
+            {'username': 'vincent', 'score': -9}
+        ]
+
+        users_score_foodshop = [
+            {'username': 'vincent', 'score': 28374},
+            {'username': 'euan', 'score': 2374},
+            {'username': 'gerry', 'score': 999},
+            {'username': 'nishad', 'score': 44}
+        ]
+
+        context = {
+            'users_score_zombuy': users_score_zombuy,
+            'users_score_foodshop': users_score_foodshop,
+        }
+
+        return render(request, 'highscore/table.html', context)

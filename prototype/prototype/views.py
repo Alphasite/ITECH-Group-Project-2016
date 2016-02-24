@@ -69,3 +69,8 @@ class Logout(View):
         logout(request)
         # redirect to site main page on success
         return HttpResponseRedirect(reverse('main'))
+
+
+class UserProfile(View):
+    def get(self, request):
+        return render(request, 'profile/profile.html')

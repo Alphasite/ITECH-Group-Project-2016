@@ -4,6 +4,6 @@ from game import views
 
 urlpatterns = [
     url(r'^$', views.Index.as_view(), name='index'),
-    url(r'^new_game/?$', views.create_game, name='new_game'),
-    url(r'^$', views.register, name='register'),
+    url(r'^new_game/?$', views.NewGame.as_view(), name='new_game'),
+    url(r'^top_table/?$', views.HighScoreTable.as_view(), name='high_score_table'),
 ]
