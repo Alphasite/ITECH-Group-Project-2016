@@ -16,10 +16,14 @@ Including another URLconf
 import django.contrib.auth.views
 from django.conf.urls import url, include
 from django.contrib import admin
+from views import Main, Login, Logout, Register
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^game/', include('game.urls')),
-    url(r'^login/$', django.contrib.auth.views.login, name='login'),
-    url(r'^logout/$', django.contrib.auth.views.logout, name='logout'),
+    url(r'^main/$', Main.as_view(), name='main'),
+    url(r'^game/', include('game.urls', namespace='game')),
+    # User-related
+    url(r'^register/$',Register.as_view(), name='register'),
+    url(r'^login/$', Login.as_view(), name='login'),
+    url(r'^logout/$',Logout.as_view(), name='logout'),
 ]

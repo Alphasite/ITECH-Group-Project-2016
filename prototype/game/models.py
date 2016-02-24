@@ -1,22 +1,41 @@
 from django.db import models
-from django.contrib.auth import models as auth_model
+from django.contrib.auth.models import User
+from picklefield.fields import PickledObjectField
 
 
 # Create your models here.
-
-# class Slang(models.Model):
-#     user = models.ForeignKey(auth_model.User)
-#     word = models.CharField(max_length=10)
-#     definition = models.CharField(max_length=1000)
-#     example = models.CharField(max_length=1000)
-#     trending_score = models.IntegerField()
-#     date_added = models.DateField()
+class GameState(models.Model):
+    current_time = PickledObjectField()
+    event = models.OneToOneField(Event)
+    user = models.ManyToOneRel(User)
+    item = models.ManyToOneRel(Item)
+    own_item = models.ManyToOneRel(OwnItem)
 
 
-# class Comments(models.Model):
-#     user = models.ForeignKey(auth_model.User)
-#     slang = models.ForeignKey(Slang)
-#     score = models.IntegerField()
-#     comment = models.CharField(max_length=1000)
-#     definition = models.CharField(max_length=1000)
-#     date_added = models.DateField()
+class Event(models.Model):
+    time_to_execute = PickledObjectField()
+
+
+class Results(models.Model):
+    user = models.ForeignKey(User)
+    score = PickledObjectField()
+
+
+class Item(models.Model):
+    name = models.CharField(max_length=20)
+    price = models.ManyToOneRel(Price)
+
+
+class Price(models.Model):
+    price = PickledObjectField()
+    time = PickledObjectField()
+
+
+class OwnItem(models.Model):
+    quantity = PickledObjectField()
+    bought_price = PickledObjectField()
+    item = models.OneToOneField(Item)
+
+
+
+
