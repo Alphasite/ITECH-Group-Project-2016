@@ -1,13 +1,10 @@
 from collections import deque, defaultdict
 from math import log
-
 from game.simulation.utility import clamp, average, trendline
 
 
 class State:
     def __init__(self, items):
-        super().__init__()
-
         self.items = items
         self.time = 0
         self.purchases = defaultdict(default_factory=lambda: 0)
@@ -21,8 +18,6 @@ class State:
 
 class Item:
     def __init__(self, name, price, sales, price_sensitivity, sales_function):
-        super().__init__()
-
         self.name = name
 
         self.prices = deque(maxlen=12)
