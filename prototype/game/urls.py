@@ -3,10 +3,8 @@ from django.conf.urls import url
 
 from game import views
 
-urlpatterns = patterns(
-    '',
-    url('^$', views.index, name='index'),
-    url('^$', views.index, name='register')
-    # url('^about$', views.about, name='about'),
-    # url('^category/(?P<category_name_slug>[\w\-]+)/?$', views.category, name='category'),
-)
+urlpatterns = [
+    url(r'^$', views.index, name='index'),
+    url(r'^new_game/?$', name='new_game'),
+    url(r'^$', views.index, name='register')
+]
