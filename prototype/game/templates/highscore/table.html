@@ -17,15 +17,15 @@
 
                 <h2>High Score Table</h2>
                 <div>
-                    {% if game %}
-                        {% for gamemode in  gamemodes %}
-                            <h3> {{ game.title }}</h3>
-                            {% for game in games %}
+                    {% if Results %}
+                       {% comment %} {% for gamemode in  gamemodes %}
+                            <h3> {{ game.title }}</h3>{% endcomment%}
+                            {% for result in Results %}
                                 <h4 class="list-group-item-heading">{{ Results.user }}</h4>
                                 <p class="list-group-item-text">{{ Results.score }}</p>
                             {% endfor %}
 
-                        {% endfor %}
+                      {% comment %}  {% endfor %} {% endcomment %}
                     {% else %}
                         there are no games!
                     {% endif %}
