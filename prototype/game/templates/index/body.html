@@ -3,9 +3,13 @@
 {% block content %}
 
     <div class="jumbotron">
-        <h1>Play!</h1>
-        <p>...</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Select Mode</a></p>
+        <h1 class="display-3">Play!</h1>
+        <p class="lead">...</p>
+        <hr class="m-y-2">
+        <p>Hi there...</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mode-select-modal">Select Mode</a>
+        </p>
     </div>
 
     {% include 'index/new-game.html' %}
