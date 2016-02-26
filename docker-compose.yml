@@ -1,0 +1,13 @@
+# db:
+#   image: postgres
+#   volumes:
+#     - ./data/postgresql/:/var/lib/postgresql
+
+zombuy:
+  build: .
+  volumes:
+    - ./data/:/data/
+  ports:
+    - "8001:8000"
+  links:
+    - db
