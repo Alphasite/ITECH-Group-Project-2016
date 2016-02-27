@@ -3,8 +3,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import View
-import forms
 import game.utility as user_util
+from prototype import forms
 
 
 class Main(View):

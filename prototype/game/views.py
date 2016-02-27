@@ -1,4 +1,6 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
 from django.views.generic import View
 
 
@@ -34,3 +36,17 @@ class HighScoreTable(View):
         }
 
         return render(request, 'highscore/table.html', context)
+
+
+class InProgressGame(View):
+
+    # @method_decorator(login_required)
+    def get(self, request, game_id):
+        game_state = {
+            "balance": 100,
+            "days_remaining": 7,
+        }
+        return render(request, 'game/game.html', {'state': game_state})
+
+    def put(self, request):
+        pass

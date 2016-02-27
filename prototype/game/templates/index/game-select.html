@@ -1,45 +1,63 @@
-{% extends "common/base.html" %}
+{% load staticfiles %}
+<div id="mode-select-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-body">
+            <div class="card-group">
+                <div class="card">
+                    <img class="card-img-top" src="{% static "images/tmp/320px-Flickr_-_Josh_Jensen_-_Metallica_Zombie.jpg" %}" alt="Card image cap">
+                    <div class="card-header">
+                        <h4 class="card-title">Card title</h4>
+                        <p class="card-text">Some quick example text to build on the card title and make up the
+                            bulk of the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
+                    <div class="card-block">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
 
-{% block content %}
+                <div class="card">
+                    <img class="card-img-top" src="{% static "images/tmp/320px-Flickr_-_Josh_Jensen_-_Metallica_Zombie.jpg" %}" alt="Card image cap">
+                    <div class="card-header">
+                        <h4 class="card-title">Card title</h4>
+                        <p class="card-text">Some quick example text to build on the card title and make up the
+                            bulk of the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
+                    <div class="card-block">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
 
-    <div id="rule-selector">
-        <ul class="media-list">
-            <li class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <img class="media-object" src="..." alt="...">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading">ZomBuy</h4>
-                    ...
-                </div>
-            </li>
-            <li class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <img class="media-object" src="..." alt="...">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading">ShopKeep</h4>
-                    ...
-                </div>
-            </li>
-        </ul>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-12 col-md-6">
-            <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                    <h3>Thumbnail label</h3>
-                    <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                <div class="card">
+                    <img class="card-img-top" src="{% static "images/tmp/320px-Flickr_-_Josh_Jensen_-_Metallica_Zombie.jpg" %}" alt="Card image cap">
+                    <div class="card-header">
+                        <h4 class="card-title">Card title</h4>
+                        <p class="card-text">Some quick example text to build on the card title and make up the
+                            bulk of the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
+                    <div class="card-block">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-{% endblock %}
+</div>

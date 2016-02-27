@@ -111,6 +111,7 @@ crashlytics-build.properties
 
 db.sqlite3
 
-venv/
+/venv/
 # Mac stuff
 *.DS_Store
+/data/
