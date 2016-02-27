@@ -2,4 +2,8 @@
 
 {% block content %}
 
+    {% include "game/info_bar.html" with balance=state.balance days_remaining=state.days_remaining %}
+    {% include "game/events.html" with events=state.events %}
+    {% include "game/purchase.html" with items=state.items %}
+
 {% endblock %}
