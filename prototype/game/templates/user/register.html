@@ -9,9 +9,7 @@
 
             <div class="pagination-centered text-center btn-group" id="button-group">
                 <button class="btn btn-primary" type="submit">Register</button>
-                <button class="btn btn-secondary"
-                        onclick="window.location.href='{% url 'game:index' %}'"
-                        type="button">Cancel</button>
+                <a class="btn btn-secondary" href="{% url 'game:index' %}">Cancel</a>
             </div>
     </form>
 {% endblock %}
