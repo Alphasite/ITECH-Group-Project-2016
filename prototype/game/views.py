@@ -30,12 +30,12 @@ class HighScoreTable(View):
             {'username': 'nishad', 'score': 44}
         ]
 
-        context = {
-            'users_score_zombuy': users_score_zombuy,
-            'users_score_foodshop': users_score_foodshop,
-        }
+        themes = [
+            {'name': 'zombuy', 'scores': users_score_zombuy},
+            {'name': 'foodshop', 'scores': users_score_foodshop}
+        ]
 
-        return render(request, 'highscore/table.html', context)
+        return render(request, 'highscore/table.html', {'themes': themes})
 
 
 class InProgressGame(View):

@@ -3,8 +3,6 @@
 {% block content %}
 
 
-    <!-- this obviously isn't finished, but without all sorts of databasey
-    goodness it isn't going to do anything. -->
 
     <div class="container">
         <div class="row">
@@ -16,19 +14,23 @@
                 <h2>Overview</h2>
 
                 <h2>High Score Table</h2>
+                <br>
                 <div>
-                    {% if Results %}
-                       {% comment %} {% for gamemode in  gamemodes %}
-                            <h3> {{ game.title }}</h3>{% endcomment%}
-                            {% for result in Results %}
-                                <h4 class="list-group-item-heading">{{ Results.user }}</h4>
-                                <p class="list-group-item-text">{{ Results.score }}</p>
-                            {% endfor %}
+                    {% if themes %}
+                        {% for theme in themes %}
+                            <h2><b>{{theme.name}}</b></h2>
+                            <br>
+                            {% for user in theme.scores %}
+                                <h4 <a href="#" class="list-group-item">{{user.username}}  :   {{user.score}}</a></h4>
 
-                      {% comment %}  {% endfor %} {% endcomment %}
+                            {% endfor %}
+                            <br>
+                        {% endfor %}
                     {% else %}
-                        there are no games!
+                        there are no games
+
                     {% endif %}
+
                 </div>
 
             </div>
