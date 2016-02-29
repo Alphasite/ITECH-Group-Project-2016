@@ -31,8 +31,8 @@ class HighScoreTable(View):
         ]
 
         themes = [
-            {'name': 'zombuy', 'scores': users_score_zombuy},
-            {'name': 'foodshop', 'scores': users_score_foodshop}
+            {'name': 'Zombuy', 'scores': users_score_zombuy},
+            {'name': 'Foodshop', 'scores': users_score_foodshop}
         ]
 
         return render(request, 'highscore/table.html', {'themes': themes})

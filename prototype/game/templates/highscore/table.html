@@ -10,15 +10,12 @@
             <div class="col-sm-12">
 
 
-
-                <h2>Overview</h2>
-
                 <h2>High Score Table</h2>
                 <br>
                 <div>
                     {% if themes %}
                         {% for theme in themes %}
-                            <h2><b>{{theme.name}}</b></h2>
+                            <h2>{{theme.name}}</h2>
                             <br>
                             {% for user in theme.scores %}
                                 <h4><a href="#" class="list-group-item">{{user.username}}  :  {{user.score}}</a></h4>
@@ -36,5 +33,7 @@
             </div>
         </div>
     </div>
-
+    <style type="text/css">
+        body { background: Black  !important; color: white; font-family: VT323 !important }
+    </style>
 {% endblock %}
