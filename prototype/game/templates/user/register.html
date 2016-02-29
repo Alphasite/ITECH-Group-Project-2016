@@ -6,11 +6,10 @@
     <form id="user_register" action="{% url 'register' %}" method="post" class="form-login-register">
             {% csrf_token %}
             {{ form }}
-            <div class="pagination-centered text-center btn-group-lg" id="button-group">
-                <button class="btn btn-primary" type="submit">Resgiter</button>
-                <button class="btn btn-primary"
-                        onclick="window.location.href='{% url 'main' %}'"
-                        type="button">Cancel</button>
+
+            <div class="pagination-centered text-center btn-group" id="button-group">
+                <button class="btn btn-primary" type="submit">Register</button>
+                <a class="btn btn-secondary" href="{% url 'game:index' %}">Cancel</a>
             </div>
     </form>
 {% endblock %}
