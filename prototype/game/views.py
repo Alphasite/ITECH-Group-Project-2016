@@ -45,8 +45,24 @@ class InProgressGame(View):
         game_state = {
             "balance": 100,
             "days_remaining": 7,
-        }
+            }
         return render(request, 'game/game.html', {'state': game_state})
 
     def put(self, request):
         pass
+
+class purchase(View):
+    def get(self,request):
+        #todo: do it with the real models
+        sample_data =[
+            {'quantity': '5','bought_price': '8','item': {'name' : 'spaghetti' ,'price':{'price':'5','time':'4'}}},
+            {'quantity': '2','bought_price': '12','item': {'name' : 'toad' ,'price':{'price':'11','time':'4'}}},
+
+            {'quantity': '77','bought_price': '31','item': {'name' : 'eeeeeeeeeeee' ,'price':{'price':'70','time':'4'}}},
+
+            {'quantity': '1','bought_price': '1','item': {'name' : 'bread' ,'price':{'price':'2','time':'4'}}},
+
+            {'quantity': '9','bought_price': '1','item': {'name' : 'probably' ,'price':{'price':'8','time':'4'}}}
+
+        ]
+        return render(request, 'game/purchase.html',{'sample_data': sample_data});
