@@ -1,0 +1,41 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+
+
+    <canvas id="graph-hello" height="400" width="800"></canvas>
+
+    <script>
+        var items = []
+        var l = []
+        var n = 0
+
+        {% for u in items.price %}
+            l[n] = "{{ u.time }}"
+            items[{{ u.time }}] = {{ u.price }};
+
+            n++;
+            console.log(items)
+        {% endfor %}
+        var data = {
+            labels:l,
+            datasets: [
+                {
+                    label: "My First dataset",
+                    fillColor: "rgba(220,220,220,0.2)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: items
+                }
+            ]
+        }
+        var ctx = document.getElementById("graph-{{ items.name }}").getContext("2d");
+        var lineChart = new Chart(ctx).Line(data);
+
+
+
+    </script>
+{% endblock %}

@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic import View
-
+from models import Item
 
 class Index(View):
     def get(self, request):
@@ -50,3 +50,9 @@ class InProgressGame(View):
 
     def put(self, request):
         pass
+
+class graphView(View):
+
+    def get(self, request):
+        items = {'name': "hello", 'price':[{'price': 20, 'time':1},{'price': 40, 'time':2}, {'price': 0, 'time':0}]}
+        return render(request, 'game/graph.html', {'items':items})

@@ -6,10 +6,10 @@ from picklefield.fields import PickledObjectField
 # Create your models here.
 class GameState(models.Model):
     current_time = PickledObjectField()
-    event = models.OneToOneField(Event)
-    user = models.ManyToOneRel(User)
-    item = models.ManyToOneRel(Item)
-    own_item = models.ManyToOneRel(OwnItem)
+    event = models.OneToOneField("Event")
+    user = models.ForeignKey(User)
+    item = models.ForeignKey('Item')
+    own_item = models.ForeignKey('OwnItem')
 
 
 class Event(models.Model):
@@ -23,7 +23,7 @@ class Results(models.Model):
 
 class Item(models.Model):
     name = models.CharField(max_length=20)
-    price = models.ManyToOneRel(Price)
+    price = models.ForeignKey('Price')
 
 
 class Price(models.Model):
