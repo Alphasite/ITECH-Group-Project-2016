@@ -42,18 +42,7 @@ class InProgressGame(View):
 
     # @method_decorator(login_required)
     def get(self, request, game_id):
-        game_state = {
-            "balance": 100,
-            "days_remaining": 7,
-            }
-        return render(request, 'game/game.html', {'state': game_state})
 
-    def put(self, request):
-        pass
-
-class purchase(View):
-    def get(self,request):
-        #todo: do it with the real models
         sample_data =[
             {'quantity': '5','bought_price': '8','item': {'name' : 'spaghetti' ,'price':{'price':'5','time':'4'}}},
             {'quantity': '2','bought_price': '12','item': {'name' : 'toad' ,'price':{'price':'11','time':'4'}}},
@@ -65,4 +54,13 @@ class purchase(View):
             {'quantity': '9','bought_price': '1','item': {'name' : 'probably' ,'price':{'price':'8','time':'4'}}}
 
         ]
-        return render(request, 'game/purchase.html',{'sample_data': sample_data});
+
+        game_state = {
+            "balance": 100,
+            "days_remaining": 7,
+            }
+        return render(request, 'game/game.html', {'state': game_state},{'sample_data': sample_data})
+
+    def put(self, request):
+        pass
+
