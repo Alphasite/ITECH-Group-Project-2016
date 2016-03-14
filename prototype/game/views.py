@@ -55,11 +55,28 @@ class InProgressGame(View):
 
         ]
 
+        sample_events_past=[
+            {'name': 'zombie attack', 'days_since':'6'},
+            {'name': 'Raid', 'days_since':'2'},
+            {'name': 'Snow', 'days_since':'8'},
+            {'name': 'Forgot how to breath', 'days_since':'10'},
+            {'name': 'Remembered how to breath', 'days_since':'8'}
+        ]
+
+        sample_events_future=[
+            {'name': 'winter is coming','days_until':'12'},
+            {'name': 'Coming down with a cold','days_until':'1'}
+
+        ]
+
         game_state = {
             "balance": 100,
             "days_remaining": 7,
             }
-        return render(request, 'game/game.html', {'state': game_state},{'sample_data': sample_data})
+
+
+
+        return render(request, 'game/game.html', {'state': game_state}, {'sample_data': sample_data}, {'sample_events_past':sample_events_past},{'sample_events_future':sample_events_future})
 
     def put(self, request):
         pass
