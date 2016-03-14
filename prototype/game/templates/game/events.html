@@ -7,20 +7,22 @@
             <ul class="list-group">
 
                 {% for event in sample_events_past %}
-                    <li class="list-group-item">{{event.name}} happened {{ event.days_since }} days ago</li>
+                    <li class="list-group-item">'{{event.name}}' happened {{ event.days_since }} day(s) ago</li>
 
                 {% endfor %}
             </ul>
+            <br>
         </div>
         <div class="col-sm-6">
             <h4>Future Events</h4>
             <ul class="list-group">
 
                 {% for event in sample_events_future %}
-                    <li class="list-group-item">{{event.name}} will happen in {{ event.days_until }} days</li>
+                    <li class="list-group-item">'{{event.name}}' will happen in {{ event.days_until }} day(s)</li>
 
                 {% endfor %}
             </ul>
+            <br>
         </div>
 
     </div>
