@@ -76,7 +76,7 @@ class InProgressGame(View):
 
 
 
-        return render(request, 'game/game.html', {'state': game_state}, {'sample_data': sample_data}, {'sample_events_past':sample_events_past},{'sample_events_future':sample_events_future})
+        return render(request, 'game/game.html', {'state': game_state, 'sample_data': sample_data, 'sample_events_past':sample_events_past,'sample_events_future':sample_events_future})
 
     def put(self, request):
         pass
