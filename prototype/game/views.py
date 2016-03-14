@@ -30,23 +30,54 @@ class HighScoreTable(View):
             {'username': 'nishad', 'score': 44}
         ]
 
-        context = {
-            'users_score_zombuy': users_score_zombuy,
-            'users_score_foodshop': users_score_foodshop,
-        }
+        themes = [
+            {'name': 'Zombuy', 'scores': users_score_zombuy},
+            {'name': 'Foodshop', 'scores': users_score_foodshop}
+        ]
 
-        return render(request, 'highscore/table.html', context)
+        return render(request, 'highscore/table.html', {'themes': themes})
 
 
 class InProgressGame(View):
 
     # @method_decorator(login_required)
     def get(self, request, game_id):
+
+        sample_data =[
+            {'quantity': '5','bought_price': '8','item': {'name' : 'spaghetti' ,'price':{'price':'5','time':'4'}}},
+            {'quantity': '2','bought_price': '12','item': {'name' : 'toad' ,'price':{'price':'11','time':'4'}}},
+
+            {'quantity': '77','bought_price': '31','item': {'name' : 'eeeeeeeeeeee' ,'price':{'price':'70','time':'4'}}},
+
+            {'quantity': '1','bought_price': '1','item': {'name' : 'bread' ,'price':{'price':'2','time':'4'}}},
+
+            {'quantity': '9','bought_price': '1','item': {'name' : 'probably' ,'price':{'price':'8','time':'4'}}}
+
+        ]
+
+        sample_events_past=[
+            {'name': 'zombie attack', 'days_since':'6'},
+            {'name': 'Raid', 'days_since':'2'},
+            {'name': 'Snow', 'days_since':'8'},
+            {'name': 'Forgot how to breath', 'days_since':'10'},
+            {'name': 'Remembered how to breath', 'days_since':'8'}
+        ]
+
+        sample_events_future=[
+            {'name': 'winter is coming','days_until':'12'},
+            {'name': 'Coming down with a cold','days_until':'1'}
+
+        ]
+
         game_state = {
             "balance": 100,
             "days_remaining": 7,
-        }
-        return render(request, 'game/game.html', {'state': game_state})
+            }
+
+
+
+        return render(request, 'game/game.html', {'state': game_state, 'sample_data': sample_data, 'sample_events_past':sample_events_past,'sample_events_future':sample_events_future})
 
     def put(self, request):
         pass
+

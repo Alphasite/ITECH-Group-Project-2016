@@ -1,3 +1,21 @@
-<div>
-    Purchases!: None. (obv)
-</div>
+
+
+    <div class="col-sm-6">
+
+        <h4>Purchases</h4>
+        <br>
+
+        <ul class="list-group">
+            {% for data in sample_data %}
+                <a href="#" class = "list-group-item"> {% comment %}dunno if this should be a link but it's easily changed{% endcomment %}
+                    <h4 class="list-group-item-heading">{{data.item.name}}
+                        <span class="label label-default label-pill pull-xs-right">{{data.quantity}}</span>
+
+
+                    </h4>
+                    <p class="list-group-item-text">Bought for £{{ data.bought_price }} each.  Current market price of £{{ data.item.price.price }}</p>
+                </a>
+            {% endfor %}
+        </ul>
+    </div>
+
