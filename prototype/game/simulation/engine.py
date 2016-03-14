@@ -1,13 +1,14 @@
-from collections import deque
-from math import log
-
 import math
+from collections import deque
 
 from game.simulation.utility import clamp, average, trendline
 
 
 def simulate(state):
     pass
+
+
+ERROR_CORRECTION = 0.000000001
 
 
 class State:
@@ -22,13 +23,7 @@ class State:
         self.time += 1
 
     def __str__(self, *args, **kwargs):
-        items = []
-        for item in self.items.values():
-            items.append("{}: £{:,.2f}x{}".format(
-                item.name,
-                item.price,
-                get_deque_tail(item.sales_per_quarter)
-            ))
+        items = [str(item) for item in self.items.values()]
 
         return "Time: {} {}".format(self.time, "\t\n".join(items))
 
@@ -48,15 +43,27 @@ class Item:
         self.prices_per_quarter.append(price)
 
         self.owned = 0
-
-    def update_price(self, number_of_ticks):
         self.owned_per_quarter.append(self.owned)
 
+    def update_price(self, number_of_ticks):
+        """The sales curve here models inelastic demand
+        :param number_of_ticks: The current time in the simulation.
+        :type number_of_ticks: int
+        """
+
         price = self.price
-        sales = max(0, self.sales_function(number_of_ticks)) + (self.owned - get_deque_tail(self.owned_per_quarter))
+        sales = max(0, self.sales_function(number_of_ticks)) + (self.owned - self.owned_per_quarter[-1])
+
+        self.owned_per_quarter.append(self.owned)
 
         sales_delta = self.average_sales - sales
-        sales_delta_percentage = 1 / (1 + pow(math.e, clamp(sales_delta / self.average_sales, -1, 1))) - 0.5
+        sales_percentage_of_normal = sales_delta / self.average_sales if self.average_sales != 0 else 1
+        sales_exponent = clamp(sales_percentage_of_normal, -1, 1)
+
+        # this uses a sigmoid curve to bound the upper and lower limits of the natural swing,
+        # and make price_sensitivity useful.
+        # Error correction is to account for the division, to avoid 1/(1 + -1)
+        sales_delta_percentage = 1 / (1 + pow(math.e, sales_exponent) + ERROR_CORRECTION) - 0.5
 
         price_delta = self.price_sensitivity * sales_delta_percentage * price
 
@@ -65,7 +72,7 @@ class Item:
 
     @property
     def price(self):
-        return get_deque_tail(self.prices_per_quarter)
+        return self.prices_per_quarter[-1]
 
     @property
     def average_price(self):
@@ -83,6 +90,11 @@ class Item:
     def prices_trendline(self):
         return trendline(self.prices_per_quarter)
 
-
-def get_deque_tail(deque):
-    return deque[len(deque) - 1]
+    def __str__(self, *args, **kwargs):
+        return "{} || Sales: £{:4,.2f}x{} Average: £{:4,.2f}x{:4,.2f}".format(
+                self.name,
+                self.price,
+                self.sales_per_quarter[-1],
+                self.average_price,
+                self.average_sales,
+        )
