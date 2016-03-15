@@ -39,7 +39,6 @@ class HighScoreTable(View):
 
 
 class InProgressGame(View):
-    # @method_decorator(login_required)
     def get(self, request, game_id):
 
         sample_data =[
