@@ -1,18 +1,17 @@
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic import View
+
+from game.simulation.engine import State
+from game.themes import themes
 
 
 class Index(View):
     def get(self, request):
         return render(request, 'index/body.html')
-
-
-class NewGame(View):
-    def get(self, request):
-        return render(request, 'game/game.html')
-
 
 class HighScoreTable(View):
     def get(self, request):
@@ -39,45 +38,47 @@ class HighScoreTable(View):
 
 
 class InProgressGame(View):
-
-    # @method_decorator(login_required)
+    @method_decorator(login_required)
     def get(self, request, game_id):
+        from game.models import GameState
 
-        sample_data =[
-            {'quantity': '5','bought_price': '8','item': {'name' : 'spaghetti' ,'price':{'price':'5','time':'4'}}},
-            {'quantity': '2','bought_price': '12','item': {'name' : 'toad' ,'price':{'price':'11','time':'4'}}},
+        persist = GameState.objects.get(id=game_id)
+        state = persist.state
 
-            {'quantity': '77','bought_price': '31','item': {'name' : 'eeeeeeeeeeee' ,'price':{'price':'70','time':'4'}}},
-
-            {'quantity': '1','bought_price': '1','item': {'name' : 'bread' ,'price':{'price':'2','time':'4'}}},
-
-            {'quantity': '9','bought_price': '1','item': {'name' : 'probably' ,'price':{'price':'8','time':'4'}}}
-
-        ]
-
-        sample_events_past=[
-            {'name': 'zombie attack', 'days_since':'6'},
-            {'name': 'Raid', 'days_since':'2'},
-            {'name': 'Snow', 'days_since':'8'},
-            {'name': 'Forgot how to breath', 'days_since':'10'},
-            {'name': 'Remembered how to breath', 'days_since':'8'}
-        ]
-
-        sample_events_future=[
-            {'name': 'winter is coming','days_until':'12'},
-            {'name': 'Coming down with a cold','days_until':'1'}
-
-        ]
-
-        game_state = {
-            "balance": 100,
-            "days_remaining": 7,
-            }
-
-
-
-        return render(request, 'game/game.html', {'state': game_state, 'sample_data': sample_data, 'sample_events_past':sample_events_past,'sample_events_future':sample_events_future})
+        if persist is not None:
+            return render(request, 'game/game.html', {
+                'state': persist.state,
+                'items': persist.state.items,
+            })
+        else:
+            HttpResponse(status=404)
 
     def put(self, request):
         pass
 
+    @method_decorator(login_required)
+    def put(self, request, game_id):
+        from game.models import GameState
+
+        GameState.objects.get(game_id)
+
+        persist = GameState.objects.get(id=game_id)
+        state = persist.state
+
+        # request.
+
+class CreateGame(View):
+    @method_decorator(login_required)
+    def post(self, request, theme_name):
+        from game.models import GameState
+
+        if theme_name in themes:
+            state = GameState()
+            state.user = request.user
+            state.state = themes[theme_name].simulation
+            state.theme = theme_name
+            state.save()
+
+            return HttpResponseRedirect(reverse('game:inprogress_game', kwargs={'game_id': state.id}))
+        else:
+            return HttpResponse(status=422)

@@ -7,6 +7,79 @@ function transitionTo(source, destination) {
     $(destination).modal("show");
 }
 
-$(document).ready(function() {
-    $("#login")
+$(document).ready(function () {
+    $.ajaxSetup({
+        headers: {"X-CSRFToken": getCookie("csrftoken")}
+    });
+
+    var canPurchase = true;
+
+    function calculateFundsRequired(event) {
+        var sum = 0;
+
+        var balance = $("#items-list").data("balance");
+
+
+        $.each($(".purchase-amount-slider"), function(key, slider) {
+            sum += slider.dataset.itemCost * slider.value;
+        });
+
+        if (sum > balance) {
+            var element = $("#commit-purchases");
+            element.removeClass("btn-success");
+            element.addClass("btn-danger");
+            element.text("Insufficient Funds");
+            canPurchase = false;
+        } else {
+            var element = $("#commit-purchases");
+            element.removeClass("btn-danger");
+            element.addClass("btn-success");
+            element.text("Submit Purchase(s)");
+            canPurchase = true;
+        }
+
+        return balance;
+    }
+
+    $(".purchase-amount-slider").change(calculateFundsRequired);
+
+    $("#commit-purchases").click(function(event) {
+        var url = event.target.dataset.url + "?";
+        var items = {};
+        var sum = 0;
+
+        var balance = $("#items-list").data("balance");
+
+        $(".purchase-amount-slider").map(function(slider) {
+            items[slider.data("itemName")] = slider.value;
+            sum += slider.data("itemCost");
+        });
+
+        if (calculateFundsRequired() < balance) {
+            window.url = url;
+        }
+
+        calculateFundsRequired()
+    })
 });
+
+// Sourced From: http://stackoverflow.com/questions/6506897/csrf-token-missing-or-incorrect-while-post-parameter-via-ajax-in-django
+function getCookie(name) {
+    if (document.cookie.length > 0) {
+        var start = document.cookie.indexOf(name + "=");
+        var end;
+
+        if (start != -1) {
+            start = start + name.length + 1;
+            end = document.cookie.indexOf(";", start);
+
+            if (end == -1) {
+                end = document.cookie.length;
+            }
+
+            return unescape(document.cookie.substring(start, end));
+        }
+    } else {
+        return "";
+    }
+}
