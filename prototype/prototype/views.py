@@ -43,7 +43,7 @@ class Login(View):
     # If it is a get, display the form for people to enter detail
     def get(self, request):
         form = forms.LoginForm()
-        return render(request, 'user/login.html', {'form': form})
+        return render(request, 'user/index.html', {'form': form})
 
     # Login otherwise
     def post(self, request):

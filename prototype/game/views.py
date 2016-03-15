@@ -39,7 +39,6 @@ class HighScoreTable(View):
 
 
 class InProgressGame(View):
-
     # @method_decorator(login_required)
     def get(self, request, game_id):
 
@@ -73,8 +72,6 @@ class InProgressGame(View):
             "balance": 100,
             "days_remaining": 7,
             }
-
-
 
         return render(request, 'game/game.html', {'state': game_state, 'sample_data': sample_data, 'sample_events_past':sample_events_past,'sample_events_future':sample_events_future})
 
