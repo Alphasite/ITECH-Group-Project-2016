@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
@@ -53,19 +55,26 @@ class InProgressGame(View):
         else:
             HttpResponse(status=404)
 
-    def put(self, request):
-        pass
-
     @method_decorator(login_required)
-    def put(self, request, game_id):
+    def post(self, request, game_id):
         from game.models import GameState
-
-        GameState.objects.get(game_id)
 
         persist = GameState.objects.get(id=game_id)
         state = persist.state
 
-        # request.
+        data = json.loads(request.body)
+
+        for item in state.items:
+            item.owned = int(data[item.name])
+
+        state.tick()
+
+        persist.state = state
+        persist.save()
+
+        return HttpResponse(status=200)
+
+
 
 class CreateGame(View):
     @method_decorator(login_required)

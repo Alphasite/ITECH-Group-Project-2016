@@ -44,19 +44,21 @@ $(document).ready(function () {
     $(".purchase-amount-slider").change(calculateFundsRequired);
 
     $("#commit-purchases").click(function(event) {
-        var url = event.target.dataset.url + "?";
         var items = {};
         var sum = 0;
 
         var balance = $("#items-list").data("balance");
 
-        $(".purchase-amount-slider").map(function(slider) {
-            items[slider.data("itemName")] = slider.value;
-            sum += slider.data("itemCost");
+        $.each($(".purchase-amount-slider"), function(key, slider) {
+            items[slider.dataset.itemName] = slider.value;
+            sum += slider.dataset.itemCost;
         });
 
-        if (calculateFundsRequired() < balance) {
-            window.url = url;
+        if (calculateFundsRequired() <= balance) {
+            $.post(window.url, JSON.stringify(items), function (data) {
+                console.log("Completed day.");
+                location.reload();
+            });
         }
 
         calculateFundsRequired()

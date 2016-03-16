@@ -7,10 +7,6 @@ from game.simulation.utility import clamp, average, trendline
 
 VERSION = 0
 
-def simulate(state):
-    pass
-
-
 ERROR_CORRECTION = 0.000000001
 
 
@@ -26,7 +22,7 @@ class State:
             item.state = self
 
     def tick(self):
-        for item in self.items.values():
+        for item in self.items:
             self.balance -= item.update_price(self.time)
 
         self.time += 1
@@ -114,7 +110,7 @@ class Item:
 
         self.total_spent_on_inventory += balance_delta
 
-        sales = max(0, self.sales_function.calculate(number_of_ticks)) + owned_delta
+        sales = int(max(0, self.sales_function.calculate(number_of_ticks))) + owned_delta
 
         self.owned_per_quarter.append(self.owned)
 
@@ -183,4 +179,4 @@ class SalesCalculation:
         self.offset_from_zero = offset_from_zero
 
     def calculate(self, t):
-        return(math.sin(t / self.cycle_period) + 0.5) * (self.amplitude / 2.0) + self.offset_from_zero
+        return (math.sin(t / self.cycle_period) + 0.5) * (self.amplitude / 2.0) + self.offset_from_zero
