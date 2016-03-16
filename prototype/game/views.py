@@ -15,6 +15,7 @@ class Index(View):
     def get(self, request):
         return render(request, 'index/body.html')
 
+
 class HighScoreTable(View):
     def get(self, request):
         users_score_zombuy = [
@@ -67,14 +68,49 @@ class InProgressGame(View):
         for item in state.items:
             item.owned = int(data[item.name])
 
-        state.tick()
+        if state.time < state.theme.time_limit:
+            state.tick()
 
-        persist.state = state
-        persist.save()
+            persist.state = state
+            persist.save()
 
-        return HttpResponse(status=200)
+            state = {
+                "success": True,
+                "gameover": False,
+                "next": reverse("game:inprogress_game", kwargs={"game_id": game_id})
+            }
+
+        else:
+            state = {
+                "success": True,
+                "gameover": True,
+                "next": reverse("game:gameover", kwargs={"game_id": game_id})
+            }
+
+        return HttpResponse(json.dumps(state), status=200, content_type="application/json")
 
 
+class GameOver(View):
+    @method_decorator(login_required)
+    def get(self, request, game_id):
+        from game.models import GameState, Results
+        try:
+            result = Results.objects.get(id=game_id)
+        except Results.DoesNotExist:
+            game = GameState.objects.get(id=game_id)
+            state = game.state
+
+            result = Results(id=game.id, user=request.user, score=state.score, theme=game.theme)
+            result.save()
+
+            game.delete()
+
+        context = {
+            "score": result.score,
+            "theme": result.theme,
+        }
+
+        return render(request, "gameover/gameover.html", context)
 
 class CreateGame(View):
     @method_decorator(login_required)

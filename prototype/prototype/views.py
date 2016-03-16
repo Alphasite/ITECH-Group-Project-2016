@@ -21,6 +21,8 @@ class Register(View):
 
     # Login otherwise
     def post(self, request):
+        from game.models import UserProfile
+
         form = forms.RegisterForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
@@ -33,6 +35,11 @@ class Register(View):
                 user_util.save_user(username, password, email)
                 # Direct to index page on success
                 user = authenticate(username=username, password=password)
+
+
+                profile = UserProfile(user=user)
+                profile.save()
+
                 login(request, user)
                 return HttpResponseRedirect(reverse('game:index'))
         else:

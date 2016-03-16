@@ -1,65 +1,36 @@
 {% load staticfiles %}
+{% load humanize %}
 
 <div id="current-game-select-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-body">
-            <div class="row">
-                <div class="card card-inverse col-md-3">
-                    <img class="card-img"
-                         src="{% static "images/tmp/320px-Flickr_-_Josh_Jensen_-_Metallica_Zombie.jpg" %}"
-                         alt="Card image">
-                    <div class="card-img-overlay">
-                        <h4 class="card-title">Card title</h4>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <p class="card-text">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </p>
-                    </div>
-                </div>
+            <div class="row card-group">
+                {% for game in active_games %}
+                    {% with state=game.state %}
+                        <a href="{% url 'game:inprogress_game' game_id=game.id %}">
+                            <div class="card card-inverse col-md-3">
+                                <img class="card-img"
+                                     src="{% static state.theme.small_banner_path %}"
+                                     alt="{{ state.theme.name }} banner">
+                                <div class="card-img-overlay tint">
+                                    <h4 class="card-title">{{ state.theme.name }}</h4>
+                                    <p class="card-text">{{ state.remaining_label }}</p>
+                                    <p class="card-text">
+                                        <small class="text-muted">Last
+                                            played {{ state.last_played | naturaltime }}</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    {% endwith %}
 
-                <div class="card card-inverse col-md-3">
-                    <img class="card-img"
-                         src="{% static "images/tmp/320px-Flickr_-_Josh_Jensen_-_Metallica_Zombie.jpg" %}"
-                         alt="Card image">
-                    <div class="card-img-overlay">
-                        <h4 class="card-title">Card title</h4>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <p class="card-text">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </p>
-                    </div>
+                    {% if forloop.counter0|add:1|divisibleby:3 and forloop.last == false %}
+                        </div>
+                        <div class="row">
+                    {% endif %}
+                {% endfor %}
                 </div>
-
-                <div class="card card-inverse col-md-3">
-                    <img class="card-img"
-                         src="{% static "images/tmp/320px-Flickr_-_Josh_Jensen_-_Metallica_Zombie.jpg" %}"
-                         alt="Card image">
-                    <div class="card-img-overlay">
-                        <h4 class="card-title">Card title</h4>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <p class="card-text">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card card-inverse">
-                <img class="card-img" src="{% static "images/tmp/320px-Flickr_-_Josh_Jensen_-_Metallica_Zombie.jpg" %}"
-                     alt="Card image">
-                <div class="card-img-overlay">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
-                    <p class="card-text">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </p>
-                </div>
-            </div>
         </div>
     </div>
 </div>
