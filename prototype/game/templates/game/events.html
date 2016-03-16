@@ -5,20 +5,24 @@
         <div class="col-sm-6">
             <h4>Past Events</h4>
             <ul class="list-group">
-
-                {% for event in sample_events_past %}
+                {% for event in past %}
                     <li class="list-group-item">{{event.name}} happened {{ event.days_since }} days ago</li>
-
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-sm-6">
+            <h4>Current Events</h4>
+            <ul class="list-group">
+                {% for event in current %}
+                    <li class="list-group-item">{{event.name}} will happen in {{ event.days_until }} days</li>
                 {% endfor %}
             </ul>
         </div>
         <div class="col-sm-6">
             <h4>Future Events</h4>
             <ul class="list-group">
-
-                {% for event in sample_events_future %}
+                {% for event in future %}
                     <li class="list-group-item">{{event.name}} will happen in {{ event.days_until }} days</li>
-
                 {% endfor %}
             </ul>
         </div>

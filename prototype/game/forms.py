@@ -8,3 +8,7 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'password')
+
+
+class CreateForm(forms.ModelForm):
+    theme = forms.CharField(max_length=20)
