@@ -1,21 +1,41 @@
+<div id="items-list" class="col-sm-6" data-balance="{{ state.balance }}">
+
+    <h4>Purchases</h4>
+    <br>
 
 
-    <div class="col-sm-6">
+    <ul class="list-group">
+        {% for item in items %}
+            <a href="#" class="list-group-item">
+                {# dunno if this should be a link but it's easily changed{% endcomment #}
+                <h4 class="list-group-item-heading">{{ item.name }}
+                    <span class="label label-default label-pill pull-xs-right">{{ item.number_owned }}</span>
+                </h4>
+                <div>
+                    <p>
+                        {{ item.description }}
+                    </p>
+                </div>
+                <div>
+                    <p class="list-group-item-text">
+                        Bought for £{{ item.average_purchase_price }} each. Current market price of
+                        £{{ item.current_price }}
+                    </p>
+                    <label for="name={{ item.name }}-purchase-amount">
+                        Inventory
+                        <input type="range"
+                               name="{{ item.name }}-purchase-amount"
+                               class="purchase-amount-slider"
+                               min="0"
+                               max="{{ item.number_purchasable }}"
+                               value="{{ item.number_owned }}"
+                               data-item-name="{{ item.name }}"
+                               data-item-cost="{{ item.current_price }}">
+                    </label>
+                </div>
+            </a>
+        {% endfor %}
+    </ul>
+</div>
 
-        <h2>Purchases</h2>
-        <br>
-
-        <ul class="list-group">
-            {% for data in sample_data %}
-                <a href="#" class = "list-group-item"> {% comment %}dunno if this should be a link but it's easily changed{% endcomment %}
-                    <h4 class="list-group-item-heading">{{data.item.name}}
-                        <span class="label label-default label-pill pull-xs-right">{{data.quantity}}</span>
-
-
-                    </h4>
-                    <p class="list-group-item-text">Bought for £{{ data.bought_price }} each.  Current market price of £{{ data.item.price.price }}</p>
-                </a>
-            {% endfor %}
-        </ul>
-    </div>
 

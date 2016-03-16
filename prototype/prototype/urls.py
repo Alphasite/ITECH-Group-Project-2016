@@ -16,14 +16,15 @@ Including another URLconf
 import django.contrib.auth.views
 from django.conf.urls import url, include
 from django.contrib import admin
-from prototype.views import Login, Logout, Register, UserProfile
+from prototype.views import Login, Logout, Register, UserProfile, Main
 
 urlpatterns = [
+    url(r'^main/', Main.as_view(), name='main'),
     url(r'^admin/', admin.site.urls),
     url(r'^game/', include('game.urls', namespace='game')),
     # User-related
     url(r'^register/$',Register.as_view(), name='register'),
     url(r'^login/$', Login.as_view(), name='login'),
-    url(r'^logout/$',Logout.as_view(), name='logout'),
+    url(r'^logout/$', Logout.as_view(), name='logout'),
     url(r'^profile/$', UserProfile.as_view(), name='profile')
 ]

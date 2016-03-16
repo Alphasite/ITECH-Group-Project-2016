@@ -1,41 +1,30 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 from picklefield.fields import PickledObjectField
+from game.simulation import engine
 
 
-# Create your models here.
 class GameState(models.Model):
-    current_time = PickledObjectField()
-    event = models.OneToOneField(Event)
-    user = models.ManyToOneRel(User)
-    item = models.ManyToOneRel(Item)
-    own_item = models.ManyToOneRel(OwnItem)
-
-
-class Event(models.Model):
-    time_to_execute = PickledObjectField()
+    # Rely on Django's Auto-Generated Primary Ket.
+    state = PickledObjectField()
+    user = models.ForeignKey(User)
+    theme = models.CharField(max_length=20)
+    simulation_version = models.IntegerField(default=engine.VERSION)
 
 
 class Results(models.Model):
     user = models.ForeignKey(User)
-    score = PickledObjectField()
+    score = models.IntegerField()
+    created = models.DateTimeField(auto_now=True)
 
 
-class Item(models.Model):
-    name = models.CharField(max_length=20)
-    price = models.ManyToOneRel(Price)
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, unique=True)
 
+    @property
+    def games(self):
+        return GameState.objects.get(user=User)
 
-class Price(models.Model):
-    price = PickledObjectField()
-    time = PickledObjectField()
-
-
-class OwnItem(models.Model):
-    quantity = PickledObjectField()
-    bought_price = PickledObjectField()
-    item = models.OneToOneField(Item)
-
-
-
-
+    @property
+    def results(self):
+        return Results.objects.get(user=User)
