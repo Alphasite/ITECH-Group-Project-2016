@@ -7,11 +7,6 @@ import game.utility as user_util
 from prototype import forms
 
 
-class Main(View):
-    def get(self, request):
-        return render(request, 'main.html', {})
-
-
 # Create your views here.
 class Register(View):
     # If it is a get, display the form for people to enter detail
@@ -68,7 +63,7 @@ class Logout(View):
     def get(self, request):
         logout(request)
         # redirect to site main page on success
-        return HttpResponseRedirect(reverse('main'))
+        return HttpResponseRedirect(reverse('game:index'))
 
 
 class UserProfile(View):
