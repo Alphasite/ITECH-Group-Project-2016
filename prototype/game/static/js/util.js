@@ -56,9 +56,18 @@ $(document).ready(function () {
 
         if (calculateFundsRequired() <= balance) {
             $.post(window.url, JSON.stringify(items), function (data) {
-                console.log("Completed day.");
-                location.reload();
-            });
+                if (data.success) {
+                    if (data.gameover) {
+                        console.log("Game over!");
+                        window.location.href = data.next;
+                    } else {
+                        console.log("Completed day.");
+                        location.reload();
+                    }
+                } else {
+                    console.log("Failed to update day???")
+                }
+            }, 'json');
         }
 
         calculateFundsRequired()

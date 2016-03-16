@@ -15,6 +15,7 @@ class GameState(models.Model):
 class Results(models.Model):
     user = models.ForeignKey(User)
     score = models.IntegerField()
+    theme = models.CharField(max_length=32)
     created = models.DateTimeField(auto_now=True)
 
 
@@ -23,8 +24,8 @@ class UserProfile(models.Model):
 
     @property
     def games(self):
-        return GameState.objects.get(user=User)
+        return GameState.objects.filter(user=self.user)
 
     @property
     def results(self):
-        return Results.objects.get(user=User)
+        return Results.objects.filter(user=User)

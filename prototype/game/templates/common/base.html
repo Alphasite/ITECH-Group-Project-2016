@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="{% static "css/external/tether.min.css" %}">
     <link rel="stylesheet" href="{% static "css/external/tether-theme-arrows.min.css" %}">
 
+    <link rel="stylesheet" href="{% static "css/base.css" %}">
+    <link rel="stylesheet" href="{% static "css/util.css" %}">
+
     <script src="{% static "js/external/jquery-2.2.1.min.js" %}" type="text/javascript"></script>
     <script src="{% static "js/external/tether.min.js" %}" type="text/javascript"></script>
     <script src="{% static "js/external/bootstrap.min.js" %}" type="text/javascript"></script>
@@ -31,12 +34,13 @@
     <div class="row">
         <div class="col-md-offset-2 col-xs-12 col-md-8">
             {% block content %}{% endblock %}
+            <br>
+            <footer class="footer">
+                <p>&copy; 2015-2016 School of Computing Science, the University of Glasgow, UK</p>
+            </footer>
         </div>
     </div>
 </div>
 
 </body>
-{#    <style type="text/css">#}
-{#        body {font-family: VT323 !important}#}
-{#    </style>#}
 </html>
