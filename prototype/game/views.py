@@ -15,6 +15,7 @@ class Index(View):
     def get(self, request):
         return render(request, 'index/body.html')
 
+
 class HighScoreTable(View):
     def get(self, request):
         users_score_zombuy = [
@@ -40,7 +41,6 @@ class HighScoreTable(View):
 
 
 class InProgressGame(View):
-    @method_decorator(login_required)
     def get(self, request, game_id):
         from game.models import GameState
 
@@ -55,7 +55,6 @@ class InProgressGame(View):
         else:
             HttpResponse(status=404)
 
-    @method_decorator(login_required)
     def post(self, request, game_id):
         from game.models import GameState
 
@@ -73,7 +72,6 @@ class InProgressGame(View):
         persist.save()
 
         return HttpResponse(status=200)
-
 
 
 class CreateGame(View):
