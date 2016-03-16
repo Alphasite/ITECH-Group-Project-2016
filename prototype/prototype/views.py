@@ -68,4 +68,7 @@ class Logout(View):
 
 class UserProfile(View):
     def get(self, request):
-        return render(request, 'profile/profile.html')
+        context = {
+            'balance': 50,
+        }
+        return render(request, 'profile/profile.html', context)
