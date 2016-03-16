@@ -3,6 +3,8 @@
 import math
 from collections import deque
 
+import datetime
+
 from game.simulation.utility import clamp, average, trendline
 
 VERSION = 0
@@ -17,6 +19,7 @@ class State:
         self.events = []
         self.balance = starting_balance
         self.theme = theme
+        self.last_played = datetime.datetime.now()
 
         for item in items:
             item.state = self
@@ -26,6 +29,8 @@ class State:
             self.balance -= item.update_price(self.time)
 
         self.time += 1
+
+        self.last_played = datetime.datetime.now()
 
     @property
     def progress(self):
@@ -67,6 +72,10 @@ class State:
         future_events.sort(key=lambda e: e.start_time)
 
         return future_events
+
+    @property
+    def score(self):
+        return self.balance + sum([item.total_spent_on_inventory for item in self.items])
 
     def __str__(self, *args, **kwargs):
         items = [str(item) for item in self.items.values()]

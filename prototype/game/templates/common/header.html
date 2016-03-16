@@ -5,11 +5,13 @@
         <li class="nav-item">
             <a class="nav-link" href="{% url 'game:index' %}">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="modal" data-target="#current-game-select-modal">
-                Resume Game
-            </a>
-        </li>
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="modal" data-target="#current-game-select-modal">
+                    Resume Game
+                </a>
+            </li>
+        {% endif %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'game:high_score_table' %}">Highscores</a>
         </li>
@@ -39,5 +41,8 @@
     </ul>
 
     {% include 'common/modal_popup.html' %}
-    {% include 'common/current-games.html' %}
+
+    {% if user.is_authenticated %}
+        {% include 'common/current-games.html' with active_games=profile.games  %}
+    {% endif %}
 </nav>

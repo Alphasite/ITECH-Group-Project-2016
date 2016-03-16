@@ -19,7 +19,7 @@ class Simulation:
     small_icon_path = "themes/zombuy/images/icon-small.png"
     small_banner_path = "themes/zombuy/images/banner-small.png"
 
-    time_limit = 36
+    time_limit = 15
 
     def progress_function(self, state):
         return state.time / self.time_limit
