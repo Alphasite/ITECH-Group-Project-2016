@@ -7,7 +7,6 @@ from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic import View
 
-from game.simulation.engine import State
 from game.themes import themes
 
 
@@ -111,6 +110,7 @@ class GameOver(View):
         }
 
         return render(request, "gameover/gameover.html", context)
+
 
 class CreateGame(View):
     @method_decorator(login_required)
