@@ -32,6 +32,8 @@
                                data-item-cost="{{ item.current_price }}">
                     </label>
                 </div>
+                <canvas id="graph-{{ item.name }}" height="200" width="400"></canvas>
+            {% include 'game/graph.html' %}
             </a>
         {% endfor %}
     </ul>

@@ -53,7 +53,7 @@ class Simulation:
                 description="See 'ARMZZZ'."
             ),
             Item(
-                "Dr Zomboid's Zomball Cure!", 50, 20, 0.2, SalesCalculation(6, 20, 10),
+                "Dr Zomboids Zomball Cure!", 50, 20, 0.2, SalesCalculation(6, 20, 10),
                 description="Got a case of the humans? Make it disappear with just this one easy pill!"
             ),
             Item(
@@ -62,7 +62,7 @@ class Simulation:
                             "for any Undead knows the value of these precious flasks."
             ),
             Item(
-                "Dr Zomboid's Stay Upper (10 pack)", 5, 100, 0.1, SalesCalculation(2, 50),
+                "Dr Zomboids Stay Upper (10 pack)", 5, 100, 0.1, SalesCalculation(2, 50),
                 description="The little blue pill who could..."
             ),
         ]
