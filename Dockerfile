@@ -7,10 +7,6 @@ WORKDIR /code
 
 ADD requirements.txt /code/
 RUN pip install -r requirements.txt
-ADD ./protype/ /code/
+ADD ./prototype/ /code/
 
-# This is a bad idea, but it can be removed later. 
-# Its a hack for dev mode only.
-CMD ./manage.py migrate
-
-ENTRYPOINT ["python",  "manage.py", "runserver", "0.0.0.0:8000"]
+#CMD command: python manage.py runserver 0.0.0.0:8000
