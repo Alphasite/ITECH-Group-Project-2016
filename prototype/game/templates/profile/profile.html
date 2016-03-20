@@ -30,9 +30,15 @@
                       <span class="text-muted">Joint since: </span>{{ user.date_joined }}<br>
 
                       <br>
-                      <h3 class="only-bottom-margin">Balance: £{{ balance }}</h3>
-                      <h3 class="only-bottom-margin">Zomebuy Score: 400</h3>
-                      <h3 class="only-bottom-margin">Foodshop Socre: 300</h3>
+                      <h4 class="only-bottom-margin">Balance: £{{ balance }}</h4><br>
+
+                      <h4 class="only-bottom-margin">Zomebuy</h4>
+                      <span class="text-muted">Score: </span>{{ score_zombuy }}<br>
+                      <span class="text-muted">Ranking: </span>{{ ranking_zombuy }}<br><br>
+
+                      <h4 class="only-bottom-margin">Foodshop</h4>
+                      <span class="text-muted">Score: </span>{{ score_foodshop }}<br>
+                      <span class="text-muted">Ranking: </span>{{ ranking_foodshop }}<br>
                     </div>
                   </div>
                 </div>

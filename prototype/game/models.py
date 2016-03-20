@@ -5,7 +5,6 @@ from game.simulation import engine
 
 
 class GameState(models.Model):
-    # Rely on Django's Auto-Generated Primary Ket.
     state = PickledObjectField()
     user = models.ForeignKey(User)
     theme = models.CharField(max_length=20)

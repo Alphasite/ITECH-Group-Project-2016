@@ -77,5 +77,9 @@ class UserProfile(View):
     def get(self, request):
         context = {
             'balance': 50,
+            'score_zombuy': 122,
+            'ranking_zombuy': 50,
+            'score_foodshop': 332,
+            'ranking_foodshop': 125,
         }
         return render(request, 'profile/profile.html', context)
