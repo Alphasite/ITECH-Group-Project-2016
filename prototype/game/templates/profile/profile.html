@@ -1,51 +1,64 @@
 {% extends "common/base.html" %}
 {% load staticfiles %}
+{% load humanize %}
 {% block content %}
 <!--<link rel="stylesheet" href="{% static "css/profile.css" %}">-->
 <br>
 <div class="container">
-      <div class="row">
-          <div class="col-md-9">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div class="row">
-                <div class="col-md-12 lead">User profile<hr></div>
-              </div>
-              <div class="row">
-                <div class="col-md-4 text-center">
-                  <img class="img-circle avatar avatar-original" style="-webkit-user-select:none;
-                  display:block; margin:auto;" src="{% static "images/tmp/zombie-profile-page.jpg" %}">
-                </div>
-                <div class="col-md-8">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <h1 class="only-bottom-margin">{{ user.username }}</h1>
+
+    <div class="row">
+        <div class="col-md-9">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12 lead">User profile<hr></div>
                     </div>
-                  </div>
 
-                  <div class="row">
-                    <div class="col-md-12">
-                      <span class="text-muted">Email: </span>{{ user.email }}<br>
-                      <span class="text-muted">Last Login: </span>{{ user.last_login }}<br>
-                      <span class="text-muted">Joint since: </span>{{ user.date_joined }}<br>
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <img class="img-circle avatar avatar-original" style="-webkit-user-select:none;
+                      display:block; margin:auto;" src="{% static "images/tmp/zombie-profile-page.jpg" %}">
+                        </div>
 
-                      <br>
-                      <h4 class="only-bottom-margin">Balance: £{{ balance }}</h4><br>
+                        <div class="col-md-8">
 
-                      <h4 class="only-bottom-margin">Zomebuy</h4>
-                      <span class="text-muted">Score: </span>{{ score_zombuy }}<br>
-                      <span class="text-muted">Ranking: </span>{{ ranking_zombuy }}<br><br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1 class="only-bottom-margin">{{ user.username }}</h1>
+                                </div>
+                            </div>
 
-                      <h4 class="only-bottom-margin">Foodshop</h4>
-                      <span class="text-muted">Score: </span>{{ score_foodshop }}<br>
-                      <span class="text-muted">Ranking: </span>{{ ranking_foodshop }}<br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="text-muted">Email: </span>{{ user.email }}<br>
+                                    <span class="text-muted">Last Login: </span>{{ user.last_login }}<br>
+                                    <span class="text-muted">Joint since: </span>{{ user.date_joined }}<br>
+
+                                    <br>
+                                    <h4>History Ranking</h4>
+                                    <span class="text-muted">Zombuy: </span>{{ ranking_zombuy }}<br>
+                                    <span class="text-muted">Foodshop: </span>{{ ranking_foodshop }}<br><br>
+
+                                    <h4>In-Progress Games:</h4>
+                                    {% if has_active_game %}
+                                        {% for state in states_list %}
+                                            <blockquote>
+                                                <h5>{{ state.theme }}</h5>
+                                                <span class="text-muted">Last played: </span>{{ state.last_played | naturaltime }}<br>
+                                                <span class="text-muted">Balance: </span>£{{ state.balance }}<br>
+                                                <span class="text-muted">Score: </span>{{ state.score }}<br><br>
+                                            </blockquote>
+                                        {% endfor %}
+                                    {% else %}
+                                        <span class="text-muted">No active game at the moment </span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-  </div>
+    </div>
 </div>
 {% endblock %}

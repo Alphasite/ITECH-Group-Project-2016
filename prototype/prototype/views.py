@@ -74,34 +74,32 @@ class Logout(View):
 
 class UserProfile(View):
     def get(self, request):
-        from game.models import UserProfile
+        from game.models import UserProfile, Results
 
+        # Fetch active game statistics
         profile = UserProfile.objects.get(user=get_user(request))
-        states = profile.games
+        game_states = profile.games
 
-        in_progress = True
-        score_zombuy = 'Not in any active game'
-        ranking_zombuy = 'Not in any active game'
-        score_foodshop = 'Not in any active game'
-        ranking_foodshop = 'Not in any active game'
+        has_active_game = False
+        states_list = list()
+        if len(game_states) > 0:
+            has_active_game = True
+            for game_state in game_states:
+                states_list.append({
+                    'theme': game_state.theme,
+                    'balance': game_state.state.balance,
+                    'score': game_state.state.score,
+                    'last_played': game_state.state.last_played
+                })
 
-        if len(states) > 0:
-            for state in states:
-                print state.theme
-                if state.theme == 'Zombuy':
-                    score_zombuy = state.state.score
-                    # Get the ranking
-                    ranking_zombuy = 1
-                elif state.theme == 'Foodshop':
-                    score_foodshop = state.state.score
-                    ranking_foodshop = 1
+        # Fetch history best ranking
+        ranking_zombuy = profile.best_ranking_zombuy
+        ranking_foodshop = profile.best_ranking_foodshop
 
         context = {
-            'in_progress': in_progress,
-            'balance': 50,
-            'score_zombuy': score_zombuy,
+            'has_active_game': has_active_game,
+            'states_list': states_list,
             'ranking_zombuy': ranking_zombuy,
-            'score_foodshop': score_foodshop,
-            'ranking_foodshop': ranking_foodshop,
+            'ranking_foodshop': ranking_foodshop
         }
         return render(request, 'profile/profile.html', context)
