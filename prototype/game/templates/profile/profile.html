@@ -1,6 +1,9 @@
 {% extends "common/base.html" %}
 {% load staticfiles %}
 {% load humanize %}
+
+{% block title %} {{ user.username }}: User Profile {% endblock %}
+
 {% block content %}
 <!--<link rel="stylesheet" href="{% static "css/profile.css" %}">-->
 <br>

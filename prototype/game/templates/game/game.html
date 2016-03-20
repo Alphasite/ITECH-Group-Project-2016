@@ -1,5 +1,7 @@
 {% extends 'common/base.html' %}
 
+{% block title %} Main {% endblock %}
+
 {% block content %}
 
     {% include "game/info_bar.html" with balance=state.balance days_remaining=state.remaining_label %}
