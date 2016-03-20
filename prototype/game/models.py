@@ -27,4 +27,4 @@ class UserProfile(models.Model):
 
     @property
     def results(self):
-        return Results.objects.filter(user=User)
+        return Results.objects.filter(user=self.user)

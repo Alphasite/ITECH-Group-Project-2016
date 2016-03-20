@@ -31,7 +31,6 @@ class Register(View):
                 # Direct to index page on success
                 user = authenticate(username=username, password=password)
 
-
                 profile = UserProfile(user=user)
                 profile.save()
 
@@ -75,11 +74,34 @@ class Logout(View):
 
 class UserProfile(View):
     def get(self, request):
+        from game.models import UserProfile
+
+        profile = UserProfile.objects.get(user=get_user(request))
+        states = profile.games
+
+        in_progress = True
+        score_zombuy = 'Not in any active game'
+        ranking_zombuy = 'Not in any active game'
+        score_foodshop = 'Not in any active game'
+        ranking_foodshop = 'Not in any active game'
+
+        if len(states) > 0:
+            for state in states:
+                print state.theme
+                if state.theme == 'Zombuy':
+                    score_zombuy = state.state.score
+                    # Get the ranking
+                    ranking_zombuy = 1
+                elif state.theme == 'Foodshop':
+                    score_foodshop = state.state.score
+                    ranking_foodshop = 1
+
         context = {
+            'in_progress': in_progress,
             'balance': 50,
-            'score_zombuy': 122,
-            'ranking_zombuy': 50,
-            'score_foodshop': 332,
-            'ranking_foodshop': 125,
+            'score_zombuy': score_zombuy,
+            'ranking_zombuy': ranking_zombuy,
+            'score_foodshop': score_foodshop,
+            'ranking_foodshop': ranking_foodshop,
         }
         return render(request, 'profile/profile.html', context)
