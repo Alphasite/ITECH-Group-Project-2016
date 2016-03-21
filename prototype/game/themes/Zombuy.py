@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from game.simulation.engine import State, Item, SalesCalculation
+from game.simulation.engine import State, Item, SalesCalculation, Event
 
 
 class Simulation:
@@ -8,12 +8,12 @@ class Simulation:
         pass
 
     name = "Zombuy"
-    description_short = "asfsdfads"
-    description_long = "Asdadasdadasdasdasdasdasd"
+    description_short = "Buy and sell"
+    description_long = "Buy and sell goods in the zombie apocalypse"
     rules = [
-        "asdasdas",
-        "sadasffdg",
-        "sdfsfdsfgsfd"
+        "Buy Items",
+        "Sell Items",
+        "Make a profit"
     ]
 
     small_icon_path = "themes/zombuy/images/icon-small.png"
@@ -65,5 +65,22 @@ class Simulation:
                 "Dr Zomboids Stay Upper (10 pack)", 5, 100, 0.1, SalesCalculation(2, 50),
                 description="The little blue pill who could..."
             ),
-        ]
+            ]
 
+
+    @property
+    def events(self):
+        return[
+            Event(2,4,"kindled the bonfire",
+                   "Kindling was a sacred rite passed down among clerics, but all Undead can imitate the process in the same manner that they restore their Hollowing with humanity. How peculiar that humans had found little use for humanity until they turned Undead.",
+                   0.5,"Estus Flask"
+            ),
+            Event(3,5,"Brains deluge","The smartest people don't always run the fastest", 1.2,"BRAINZ"
+            ),
+            Event(7,8,"Disarmed","These don't grow on trees you know...",0.9,"ARMZZZ"
+
+            )
+            #todo: more examples
+
+
+        ]

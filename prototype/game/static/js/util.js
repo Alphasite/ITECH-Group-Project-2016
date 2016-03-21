@@ -94,3 +94,33 @@ function getCookie(name) {
         return "";
     }
 }
+
+var item = []
+var l = []
+var n = 0
+
+{% for p in item.prices_per_quarter %}
+    l[n] = n
+    item.push({{ p }});
+    n++;
+{% endfor %}
+
+var items = $("#items-list").data("item_graphs");
+
+var data = {
+    labels:l,
+    datasets: [
+        {
+            label: "My First dataset",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: item
+        }
+    ]
+}
+var ctx = document.getElementById("graph-{{ item.name }}").getContext("2d");
+var lineChart = new Chart(ctx).Line(data);

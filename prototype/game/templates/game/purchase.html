@@ -1,4 +1,10 @@
-<div id="items-list" class="col-sm-6" data-balance="{{ state.balance }}">
+{% load jsonify %}
+
+<div id="items-list"
+     class="col-sm-6"
+     data-balance="{{ state.balance }}"
+     data-graph-prices="{{ state.item_graphs | jsonify }}">
+
     <h4>Purchases</h4>
     <br>
 
