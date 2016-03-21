@@ -8,7 +8,7 @@ def clamp(value, min_value, max_value):
 
 
 def average(elements):
-    return sum(elements) / len(elements)
+    return sum(elements) / len(elements) if len(elements) != 0 else 0
 
 
 def trendline(elements):
