@@ -97,7 +97,7 @@ class State:
 
             graph_data = {
                 "x": list(range(lower_bound, upper_bound)) + [upper_bound + 3],
-                "y": list(item.prices_per_quarter) + [item.prices_trendline * 3 + item.current_price]
+                "y": list(item.prices_per_quarter) + [item.prices_trendline[0] * 3 + item.prices_trendline[1]]
             }
 
             item_graphs.append(graph_data)
