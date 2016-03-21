@@ -44,14 +44,16 @@
 
                                     <h4>In-Progress Games:</h4>
                                     {% if has_active_game %}
+                                        <ul class="list-group">
                                         {% for state in states_list %}
-                                            <blockquote>
+                                            <blockquote class="list-group-item">
                                                 <h5>{{ state.theme }}</h5>
                                                 <span class="text-muted">Last played: </span>{{ state.last_played | naturaltime }}<br>
                                                 <span class="text-muted">Balance: </span>£{{ state.balance }}<br>
                                                 <span class="text-muted">Score: </span>{{ state.score }}<br><br>
                                             </blockquote>
                                         {% endfor %}
+                                        </ul>
                                     {% else %}
                                         <span class="text-muted">No active game at the moment </span>
                                     {% endif %}
