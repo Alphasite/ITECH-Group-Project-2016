@@ -71,7 +71,7 @@ class Simulation:
     @property
     def events(self):
         return[
-            Event(2,4,"kindled the bonfire",
+            Event(2,4,"kindle the bonfire",
                    "Kindling was a sacred rite passed down among clerics, but all Undead can imitate the process in the same manner that they restore their Hollowing with humanity. How peculiar that humans had found little use for humanity until they turned Undead.",
                    0.5,"Estus Flask"
             ),

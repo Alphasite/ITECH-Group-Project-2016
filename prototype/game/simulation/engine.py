@@ -24,6 +24,9 @@ class State:
         for item in items:
             item.state = self
 
+        for event in self.events:
+            event.state = self
+
 
     def tick(self):
         for event in self.current_events:
@@ -217,13 +220,15 @@ class SalesCalculation:
 
 
 class Event():
-    def __init__(self,start_time,end_time,name,description,effect,effects):
+    def __init__(self,start_time, end_time,name, description, effect, effects):
         self.start_time = start_time
         self.end_time = end_time
         self.name = name
         self.description = description
         self.effect = effect
         self.effects = effects
+
+        self.state = None
 
         # not sure if this is the best way to do this,
         # but I was not sure how to differentiate between the
@@ -238,4 +243,11 @@ class Event():
 
         return self
 
+    @property
+    def days_since(self):
+        return self.state.time - self.end_time
+
+    @property
+    def days_until(self):
+        return  self.start_time - self.state.time
 

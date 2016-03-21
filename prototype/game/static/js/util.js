@@ -99,11 +99,11 @@ var item = []
 var l = []
 var n = 0
 
-{% for p in item.prices_per_quarter %}
-    l[n] = n
-    item.push({{ p }});
-    n++;
-{% endfor %}
+//{% for p in item.prices_per_quarter %}
+//    l[n] = n
+//    item.push({{ p }});
+//    n++;
+//{% endfor %}
 
 var items = $("#items-list").data("item_graphs");
 
