@@ -95,32 +95,38 @@ function getCookie(name) {
     }
 }
 
-var item = []
-var l = []
-var n = 0
+function getGraph(name) {
 
-//{% for p in item.prices_per_quarter %}
-//    l[n] = n
-//    item.push({{ p }});
-//    n++;
-//{% endfor %}
-
-var items = $("#items-list").data("item_graphs");
-
-var data = {
-    labels:l,
-    datasets: [
-        {
-            label: "My First dataset",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: item
+    var itemPrices = []
+    var l = []
+    var items = $("#items-list").attr("data-graph-prices");
+    var items = JSON.parse(items)
+    for (i in items){
+        if (items[i]['name'] == name){
+            console.log(name)
+            console.log(items[i]['y'])
+            l = items[i]['x']
+            itemPrices = items[i]['y']
         }
-    ]
+
+    }
+
+    var data = {
+        labels: l,
+        datasets: [
+            {
+                label: name,
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: itemPrices
+            }
+        ]
+    }
+
+    var ctx = document.getElementById("graph-" + name).getContext("2d");
+    var lineChart = new Chart(ctx).Line(data);
 }
-var ctx = document.getElementById("graph-{{ item.name }}").getContext("2d");
-var lineChart = new Chart(ctx).Line(data);

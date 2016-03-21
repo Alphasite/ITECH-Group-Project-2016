@@ -3,7 +3,7 @@
 <div id="items-list"
      class="col-sm-6"
      data-balance="{{ state.balance }}"
-     data-graph-prices="{{ state.item_graphs | jsonify }}">
+     data-graph-prices="{{ state.item_graphs}}">
 
     <h4>Purchases</h4>
     <br>
@@ -60,7 +60,8 @@
 {#                    </script>#}
                 </div>
                 <canvas id="graph-{{ item.name }}" height="200" width="400"></canvas>
-            {% include 'game/graph.html' %}
+
+                <script>getGraph("{{ item.name }}")</script>
             </a>
         {% endfor %}
     </ul>

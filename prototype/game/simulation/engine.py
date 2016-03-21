@@ -4,6 +4,7 @@ import math
 from collections import deque
 
 import datetime
+import json
 
 from game.simulation.utility import clamp, average, trendline
 
@@ -96,13 +97,14 @@ class State:
             upper_bound = self.time + len(item.prices_per_quarter)
 
             graph_data = {
+                "name": item.name,
                 "x": list(range(lower_bound, upper_bound)) + [upper_bound + 3],
                 "y": list(item.prices_per_quarter) + [item.prices_trendline[0] * 3 + item.prices_trendline[1]]
             }
 
             item_graphs.append(graph_data)
 
-        return item_graphs
+        return json.dumps(item_graphs)
 
     def __str__(self, *args, **kwargs):
         items = [str(item) for item in self.items.values()]
