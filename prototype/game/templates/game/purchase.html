@@ -39,6 +39,19 @@
                             Slide right to buy.
                         {% endif %}
                     </div>
+{#                    <script type="text/javascript">#}
+{#                        $("#purchase-slide-{{ forloop.counter }}").on("change", function() {#}
+{#                            var fund_needed = this.value * {{ item.current_price }};#}
+{#                            console.log(fund_needed);#}
+{#                            console.log({{ balance }});#}
+{#                            if (fund_needed <= {{ balance }}) {#}
+{#                                console.log("Yay enough money");#}
+{#                            }#}
+{#                            else{#}
+{#                                console.log("Not enough money");#}
+{#                            }#}
+{#                        });#}
+{#                    </script>#}
                 </div>
                 <canvas id="graph-{{ item.name }}" height="200" width="400"></canvas>
             {% include 'game/graph.html' %}
@@ -47,11 +60,5 @@
     </ul>
 </div>
 
-<script type="text/javascript">
-    {% for item in items %}
-         $("#purchase-slide-{{ forloop.counter }}").on("change", function(){
-             console.log("Yo")
-         });
-    {% endfor %}
-</script>
+
 

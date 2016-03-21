@@ -74,8 +74,12 @@ class State:
         return future_events
 
     @property
-    def score(self):
+    def total_value(self):
         return self.balance + sum([item.total_spent_on_inventory for item in self.items])
+
+    @property
+    def score(self):
+        return self.total_value
 
     def __str__(self, *args, **kwargs):
         items = [str(item) for item in self.items.values()]
@@ -169,7 +173,7 @@ class Item:
 
     @property
     def number_purchasable(self):
-        return int(self.state.balance / self.current_price)
+        return max(int(self.state.total_value / self.current_price), self.number_owned)
 
     def __str__(self, *args, **kwargs):
         return "{} || Sales: £{:4,.2f}x{} Average: £{:4,.2f}x{:4,.2f}".format(
