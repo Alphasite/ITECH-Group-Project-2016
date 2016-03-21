@@ -1,5 +1,5 @@
 <div id="items-list" class="col-sm-6" data-balance="{{ state.balance }}">
-    <h4>Purchases</h4>
+    <h3 class="text-lg-center">Purchases</h3>
     <br>
 
     <ul class="list-group">
@@ -18,10 +18,11 @@
                     <p class="list-group-item-text">
                         Bought for £{{ item.average_purchase_price }} each. Current market price of
                         £{{ item.current_price }}
-                    </p>
+                    </p><br>
                     <label for="name={{ item.name }}-purchase-amount">
                         Inventory
                         <input type="range"
+                               id="purchase-slide-{{ forloop.counter }}"
                                name="{{ item.name }}-purchase-amount"
                                class="purchase-amount-slider"
                                min="0"
@@ -30,6 +31,14 @@
                                data-item-name="{{ item.name }}"
                                data-item-cost="{{ item.current_price }}">
                     </label>
+
+                    <div id="message-container-{{ forloop.counter }}">
+                        {% if item.number_owned > 0 %}
+                            Slide right to buy and left to sell.
+                        {% elif item.number_owned == 0 %}
+                            Slide right to buy.
+                        {% endif %}
+                    </div>
                 </div>
                 <canvas id="graph-{{ item.name }}" height="200" width="400"></canvas>
             {% include 'game/graph.html' %}
@@ -37,4 +46,12 @@
         {% endfor %}
     </ul>
 </div>
+
+<script type="text/javascript">
+    {% for item in items %}
+         $("#purchase-slide-{{ forloop.counter }}").on("change", function(){
+             console.log("Yo")
+         });
+    {% endfor %}
+</script>
 
