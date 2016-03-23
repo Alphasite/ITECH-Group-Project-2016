@@ -23,9 +23,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ib=d1j-h0&-9*5=wgma-bf#mivq1h#malf$r@0)-*9ver1588+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1',
+                 'www.pythonanywhere.com']
 
 
 # Application definition
@@ -124,7 +125,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_URL = '/login/'
+STATIC_ROOT = 'game/static'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'game/static'),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'game/static'),
+# )
