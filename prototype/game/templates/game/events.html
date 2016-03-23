@@ -1,25 +1,21 @@
-<div class="container">
-    <div class="row">
+<div>
+    <div class="col-sm-12">
         <h2>Events</h2>
         <br>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
+        <div class="col-sm-6">
                     <h4>Past Events</h4>
                     <div class="list-group">
                         {% for event in past %}
+
                             <div class="list-group-item list-group-item-success">
-                                <h4 class="list-group-item-heading">{{ event.name }} happened {{ event.days_since }}
-                                    days
-                                    ago</h4>
+                            <h4 class="list-group-item-heading">{{event.name}} happened {{ event.days_since }} days ago</h4>
                                 <p class="list-group-item-text">{{ event.description }}</p>
                             </div>
+
                         {% endfor %}
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
+        <div class="col-sm-6">
                     <h4>Current Events</h4>
                     <div class="list-group">
                         {% for event in current %}
