@@ -21,7 +21,7 @@ class HighScoreTable(View):
 
         results_zombuy = Results.objects.filter(theme='Zombuy').order_by('-score')[:5]
         users_score_zombuy = list()
-        print len(results_zombuy)
+
         for result_zombuy in results_zombuy:
             users_score_zombuy.append({
                 'username': result_zombuy.user.username,
