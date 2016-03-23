@@ -12,6 +12,12 @@ cd ITECH-Group-Project-2016
 mkdir data
 ```
 
+Install in requirements using pip:
+
+```
+pip install -r requirements.txt
+```
+
 Run migrations from the 'prototype' directory:
 
 ```
