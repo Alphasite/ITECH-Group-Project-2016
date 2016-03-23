@@ -8,7 +8,7 @@ def clamp(value, min_value, max_value):
 
 
 def average(elements):
-    return sum(elements) / len(elements)
+    return sum(elements) / len(elements) if len(elements) != 0 else 0
 
 
 def trendline(elements):
@@ -16,6 +16,6 @@ def trendline(elements):
 
     elements_to_check = min(5, len(elements) - 1)
     for i in range(0, elements_to_check):
-        deltas.append(elements[-i - 1] - elements)
+        deltas.append(elements[-i - 1] - elements[-1])
 
     return average(deltas), elements[-1]

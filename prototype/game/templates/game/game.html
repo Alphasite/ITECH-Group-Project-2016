@@ -1,7 +1,11 @@
 {% extends 'common/base.html' %}
 
+{% block title %} Main {% endblock %}
+
 {% block content %}
-    {% include "game/info_bar.html" with balance=state.balance days_remaining=state.remaining_label %}
-    {% include "game/events.html" with future=state.future_events current=state.current past=state.past %}
-    {% include "game/purchase.html" with items=state.items %}
+
+    {% include "game/info_bar.html" with balance=state.balance days_remaining=state.remaining_label score=state.score %}
+    {% include "game/events.html" with future=state.future_events current=state.current_events past=state.past_events %}
+    {% include "game/purchase.html" with balance=state.balance items=state.items %}
+
 {% endblock %}

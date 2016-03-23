@@ -20,7 +20,7 @@ from prototype.views import Login, Logout, Register, UserProfile
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^game/', include('game.urls', namespace='game')),
+    url(r'^', include('game.urls', namespace='game')),
     # User-related
     url(r'^register/$',Register.as_view(), name='register'),
     url(r'^login/$', Login.as_view(), name='login'),

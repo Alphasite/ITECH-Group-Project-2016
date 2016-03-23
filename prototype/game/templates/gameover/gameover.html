@@ -1,18 +1,24 @@
 {% extends "common/base.html" %}
 
+{% block title %} Game Over {% endblock %}
+
 {% block content %}
 <div class="container">
 <div class="row">
-    <h3>
-        CONGARARARARGHGHAGRULATIONS!!!!
-    </h3>
-    <div>
-        You are WINRAR!
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-3">
+                CONGARARARARGHG
+                HAGRULATIONS!!!!</h1>
+            <p class="lead">You are WINRAR!</p>
+        </div>
     </div>
-    <div>
+</div>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
         Scored {{ score }}
     </div>
-
 </div>
 </div>
 {% endblock %}

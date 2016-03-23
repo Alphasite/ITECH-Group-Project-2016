@@ -1,13 +1,9 @@
-# db:
-#   image: postgres
-#   volumes:
-#     - ./data/postgresql/:/var/lib/postgresql
-
 zombuy:
   build: .
   volumes:
     - ./data/:/data/
   ports:
-    - "8001:8000"
-  links:
-    - db
+    - "8000:8000"
+  expose:
+    - "8000"
+  command: python manage.py runserver 0.0.0.0:8000

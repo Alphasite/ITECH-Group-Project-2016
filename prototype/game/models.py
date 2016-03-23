@@ -5,7 +5,6 @@ from game.simulation import engine
 
 
 class GameState(models.Model):
-    # Rely on Django's Auto-Generated Primary Ket.
     state = PickledObjectField()
     user = models.ForeignKey(User)
     theme = models.CharField(max_length=20)
@@ -28,4 +27,24 @@ class UserProfile(models.Model):
 
     @property
     def results(self):
-        return Results.objects.filter(user=User)
+        return Results.objects.filter(user=self.user)
+
+    @property
+    def best_ranking_zombuy(self):
+        best_result = Results.objects.filter(user=self.user, theme='Zombuy').order_by('score')[:1]
+        if len(best_result) == 0:
+            return 'no history on Zombuy'
+        else:
+            # Get all the records that have better score than the user's best score
+            better_results = Results.objects.filter(theme='Zombuy', score__gt=best_result[0].score)
+            return len(better_results) + 1
+
+    @property
+    def best_ranking_foodshop(self):
+        best_result = Results.objects.filter(user=self.user, theme='Foodshop').order_by('score')[:1]
+        if len(best_result) == 0:
+            return 'no history on Foodshop'
+        else:
+            # Get all the records that have better score than the user's best score
+            better_results = Results.objects.filter(theme='Foodshop', score__gt=best_result[0].score)
+            return len(better_results) + 1

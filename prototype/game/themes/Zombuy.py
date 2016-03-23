@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from game.simulation.engine import State, Item, SalesCalculation
+from game.simulation.engine import State, Item, SalesCalculation, Event
 
 
 class Simulation:
@@ -8,12 +8,12 @@ class Simulation:
         pass
 
     name = "Zombuy"
-    description_short = "asfsdfads"
-    description_long = "Asdadasdadasdasdasdasdasd"
+    description_short = "Buy and sell"
+    description_long = "Buy and sell goods in the zombie apocalypse"
     rules = [
-        "asdasdas",
-        "sadasffdg",
-        "sdfsfdsfgsfd"
+        "Buy Items",
+        "Sell Items",
+        "Make a profit"
     ]
 
     small_icon_path = "themes/zombuy/images/icon-small.png"
@@ -53,7 +53,7 @@ class Simulation:
                 description="See 'ARMZZZ'."
             ),
             Item(
-                "Dr Zomboid's Zomball Cure!", 50, 20, 0.2, SalesCalculation(6, 20, 10),
+                "Dr Zomboids Zomball Cure!", 50, 20, 0.2, SalesCalculation(6, 20, 10),
                 description="Got a case of the humans? Make it disappear with just this one easy pill!"
             ),
             Item(
@@ -62,8 +62,25 @@ class Simulation:
                             "for any Undead knows the value of these precious flasks."
             ),
             Item(
-                "Dr Zomboid's Stay Upper (10 pack)", 5, 100, 0.1, SalesCalculation(2, 50),
+                "Dr Zomboids Stay Upper (10 pack)", 5, 100, 0.1, SalesCalculation(2, 50),
                 description="The little blue pill who could..."
             ),
-        ]
+            ]
 
+
+    @property
+    def events(self):
+        return[
+            Event(2,4,"kindle the bonfire",
+                   "Kindling was a sacred rite passed down among clerics, but all Undead can imitate the process in the same manner that they restore their Hollowing with humanity. How peculiar that humans had found little use for humanity until they turned Undead.",
+                   0.5,"Estus Flask"
+            ),
+            Event(3,5,"Brains deluge","The smartest people don't always run the fastest", 1.2,"BRAINZ"
+            ),
+            Event(7,8,"Disarmed","These don't grow on trees you know...",0.9,"ARMZZZ"
+
+            )
+            #todo: more examples
+
+
+        ]

@@ -94,3 +94,39 @@ function getCookie(name) {
         return "";
     }
 }
+
+function getGraph(name) {
+
+    var itemPrices = []
+    var l = []
+    var items = $("#items-list").attr("data-graph-prices");
+    var items = JSON.parse(items)
+    for (i in items){
+        if (items[i]['name'] == name){
+            console.log(name)
+            console.log(items[i]['y'])
+            l = items[i]['x']
+            itemPrices = items[i]['y']
+        }
+
+    }
+
+    var data = {
+        labels: l,
+        datasets: [
+            {
+                label: name,
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: itemPrices
+            }
+        ]
+    }
+
+    var ctx = document.getElementById("graph-" + name).getContext("2d");
+    var lineChart = new Chart(ctx).Line(data);
+}
