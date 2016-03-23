@@ -25,5 +25,5 @@ urlpatterns = [
     url(r'^register/$',Register.as_view(), name='register'),
     url(r'^login/$', Login.as_view(), name='login'),
     url(r'^logout/$', Logout.as_view(), name='logout'),
-    url(r'^profile/$', UserProfile.as_view(), name='profile')
+    url(r'^profile/?$', UserProfile.as_view(), name='profile')
 ]
