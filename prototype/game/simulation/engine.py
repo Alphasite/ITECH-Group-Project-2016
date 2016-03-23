@@ -87,7 +87,7 @@ class State:
 
     @property
     def score(self):
-        return self.total_value
+        return int(self.total_value)
 
     def item_graphs(self):
         item_graphs = []
@@ -148,7 +148,7 @@ class Item:
         owned_delta = self.owned - self.owned_per_quarter[-1]
         balance_delta = owned_delta * current_price
 
-        self.total_spent_on_inventory += balance_delta
+        self.total_spent_on_inventory += self.average_purchase_price * owned_delta
 
         sales = int(max(0, self.sales_function.calculate(number_of_ticks))) + owned_delta
 
