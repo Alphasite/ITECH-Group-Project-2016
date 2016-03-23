@@ -16,6 +16,6 @@ def trendline(elements):
 
     elements_to_check = min(5, len(elements) - 1)
     for i in range(0, elements_to_check):
-        deltas.append(elements[-i - 1] - elements[-1])
+        deltas.append(elements[-1] - elements[-i - 1])
 
     return average(deltas), elements[-1]
