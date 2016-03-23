@@ -3,7 +3,7 @@
 <div id="items-list"
      class="col-sm-6"
      data-balance="{{ state.balance }}"
-     data-graph-prices="{{ state.item_graphs}}">
+     data-graph-prices="{{ state.item_graphs }}">
 
     <h4>Purchases</h4>
     <br>
@@ -12,56 +12,50 @@
         {% for item in items %}
             <a href="#" class="list-group-item">
                 {# dunno if this should be a link but it's easily changed{% endcomment #}
-                <h4 class="list-group-item-heading">{{ item.name }}
-                    <span class="label label-default label-pill pull-xs-right">{{ item.number_owned }}</span>
-                </h4>
-                <div>
-                    <p>
-                        {{ item.description }}
-                    </p>
-                </div>
-                <div>
-                    <p class="list-group-item-text">
-                        Bought for £{{ item.average_purchase_price }} each. Current market price of
-                        £{{ item.current_price }}
-                    </p><br>
-                    <label for="name={{ item.name }}-purchase-amount">
-                        Inventory
-                        <input type="range"
-                               id="purchase-slide-{{ forloop.counter }}"
-                               name="{{ item.name }}-purchase-amount"
-                               class="purchase-amount-slider"
-                               min="0"
-                               max="{{ item.number_purchasable }}"
-                               value="{{ item.number_owned }}"
-                               data-item-name="{{ item.name }}"
-                               data-item-cost="{{ item.current_price }}">
-                    </label>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="list-group-item-heading">{{ item.name }}
+                                <span class="label label-default label-pill pull-xs-right">{{ item.number_owned }}</span>
+                            </h4>
+                            <div>
+                                <p>
+                                    {{ item.description }}
+                                </p>
+                            </div>
+                            <div>
+                                <p class="list-group-item-text">
+                                    Bought for £{{ item.average_purchase_price }} each. Current market price of
+                                    £{{ item.current_price }}
+                                </p><br>
+                                <label for="name={{ item.name }}-purchase-amount">
+                                    Inventory
+                                    <input type="range"
+                                           id="purchase-slide-{{ forloop.counter }}"
+                                           name="{{ item.name }}-purchase-amount"
+                                           class="purchase-amount-slider"
+                                           min="0"
+                                           max="{{ item.number_purchasable }}"
+                                           value="{{ item.number_owned }}"
+                                           data-item-name="{{ item.name }}"
+                                           data-item-cost="{{ item.current_price }}">
+                                </label>
 
-                    <div id="message-container-{{ forloop.counter }}">
-                        {% if item.number_owned > 0 %}
-                            Slide right to buy and left to sell.
-                        {% elif item.number_owned == 0 %}
-                            Slide right to buy.
-                        {% endif %}
+                                <div id="message-container-{{ forloop.counter }}">
+                                    {% if item.number_owned > 0 %}
+                                        Slide right to buy and left to sell.
+                                    {% elif item.number_owned == 0 %}
+                                        Slide right to buy.
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <canvas id="graph-{{ item.name }}" height="200" width="400"></canvas>
+                            <script>getGraph("{{ item.name }}")</script>
+                        </div>
                     </div>
-{#                    <script type="text/javascript">#}
-{#                        $("#purchase-slide-{{ forloop.counter }}").on("change", function() {#}
-{#                            var fund_needed = this.value * {{ item.current_price }};#}
-{#                            console.log(fund_needed);#}
-{#                            console.log({{ balance }});#}
-{#                            if (fund_needed <= {{ balance }}) {#}
-{#                                console.log("Yay enough money");#}
-{#                            }#}
-{#                            else{#}
-{#                                console.log("Not enough money");#}
-{#                            }#}
-{#                        });#}
-{#                    </script>#}
                 </div>
-                <canvas id="graph-{{ item.name }}" height="200" width="400"></canvas>
-
-                <script>getGraph("{{ item.name }}")</script>
             </a>
         {% endfor %}
     </ul>
