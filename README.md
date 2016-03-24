@@ -1,4 +1,9 @@
 # ITECH-Group-Project-2016
+
+The design presentation:
+
+https://docs.google.com/document/d/1J_F1uhZTYmxgNJTLBiOfd7ynsI7o2o9r5FK5cf196m8/edit?usp=sharing
+
 To run the project locally, first clone the application to your local machine:
 
 ## Run Natively
